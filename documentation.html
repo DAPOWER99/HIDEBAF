@@ -1,0 +1,754 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HIDEBAF - Documentation</title>
+    <style>
+        :root {
+            /* Light Mode Colors */
+            --bg-primary: white;
+            --bg-secondary: #f8f9fa;
+            --bg-gradient-start: #667eea;
+            --bg-gradient-end: #764ba2;
+            --text-primary: #333;
+            --text-secondary: #555;
+            --text-tertiary: #666;
+            --border-color: #ddd;
+            --border-light: #e9ecef;
+            --code-bg: #f4f4f4;
+            --code-text: #e83e8c;
+            --header-text: white;
+            --accent-color: #667eea;
+            --accent-dark: #764ba2;
+            --info-bg: #e7f3ff;
+            --info-border: #2196F3;
+            --warning-bg: #fff3cd;
+            --warning-border: #ffc107;
+            --success-bg: #d4edda;
+            --success-border: #28a745;
+            --pre-bg: #2c3e50;
+            --pre-text: #ecf0f1;
+            --table-hover: #f8f9fa;
+            --shadow: rgba(0, 0, 0, 0.3);
+            --nav-hover: #667eea;
+        }
+
+        body.dark-mode {
+            /* Dark Mode Colors */
+            --bg-primary: #1e1e1e;
+            --bg-secondary: #2d2d2d;
+            --bg-gradient-start: #667eea;
+            --bg-gradient-end: #764ba2;
+            --text-primary: #e0e0e0;
+            --text-secondary: #b0b0b0;
+            --text-tertiary: #999;
+            --border-color: #444;
+            --border-light: #3a3a3a;
+            --code-bg: #2d2d2d;
+            --code-text: #ff79c6;
+            --header-text: white;
+            --accent-color: #8b9dff;
+            --accent-dark: #a78bfa;
+            --info-bg: #1a3a52;
+            --info-border: #64b5f6;
+            --warning-bg: #3d3000;
+            --warning-border: #ffb74d;
+            --success-bg: #1b3a1b;
+            --success-border: #66bb6a;
+            --pre-bg: #1a1a1a;
+            --pre-text: #e0e0e0;
+            --table-hover: #2d2d2d;
+            --shadow: rgba(0, 0, 0, 0.5);
+            --nav-hover: #8b9dff;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: var(--text-primary);
+            background: linear-gradient(135deg, var(--bg-gradient-start) 0%, var(--bg-gradient-end) 100%);
+            min-height: 100vh;
+            padding: 20px;
+            transition: background-color 0.3s, color 0.3s;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: var(--bg-primary);
+            border-radius: 10px;
+            box-shadow: 0 20px 60px var(--shadow);
+            overflow: hidden;
+            transition: background-color 0.3s;
+        }
+
+        header {
+            background: linear-gradient(135deg, var(--bg-gradient-start) 0%, var(--bg-gradient-end) 100%);
+            color: var(--header-text);
+            padding: 60px 40px;
+            text-align: center;
+            position: relative;
+        }
+
+        .logo {
+            font-size: 48px;
+            font-weight: bold;
+            margin-bottom: 10px;
+            letter-spacing: 2px;
+        }
+
+        .tagline {
+            font-size: 18px;
+            opacity: 0.9;
+            margin-bottom: 10px;
+        }
+
+        .subtitle {
+            font-size: 14px;
+            opacity: 0.8;
+        }
+
+        nav {
+            background: var(--bg-secondary);
+            padding: 20px 40px;
+            border-bottom: 2px solid var(--accent-color);
+            display: flex;
+            gap: 20px;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            align-items: center;
+            transition: background-color 0.3s;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 20px;
+            flex-wrap: wrap;
+            align-items: center;
+        }
+
+        nav a {
+            color: var(--accent-color);
+            text-decoration: none;
+            font-weight: 600;
+            transition: color 0.3s;
+            cursor: pointer;
+        }
+
+        nav a:hover {
+            color: var(--accent-dark);
+        }
+
+        .theme-toggle {
+            background: none;
+            border: 2px solid var(--accent-color);
+            color: var(--accent-color);
+            padding: 8px 12px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 18px;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            font-weight: 600;
+        }
+
+        .theme-toggle:hover {
+            background: var(--accent-color);
+            color: white;
+        }
+
+        main {
+            padding: 40px;
+        }
+
+        section {
+            margin-bottom: 50px;
+            display: none;
+        }
+
+        section.active {
+            display: block;
+        }
+
+        h2 {
+            color: var(--accent-color);
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 3px solid var(--accent-color);
+        }
+
+        h3 {
+            color: var(--accent-dark);
+            margin-top: 25px;
+            margin-bottom: 15px;
+        }
+
+        p {
+            margin-bottom: 15px;
+            color: var(--text-secondary);
+        }
+
+        ul, ol {
+            margin-left: 20px;
+            margin-bottom: 15px;
+        }
+
+        li {
+            margin-bottom: 8px;
+            color: var(--text-secondary);
+        }
+
+        code {
+            background: var(--code-bg);
+            padding: 2px 6px;
+            border-radius: 3px;
+            font-family: 'Courier New', monospace;
+            color: var(--code-text);
+        }
+
+        pre {
+            background: var(--pre-bg);
+            color: var(--pre-text);
+            padding: 20px;
+            border-radius: 5px;
+            overflow-x: auto;
+            margin: 15px 0;
+            font-family: 'Courier New', monospace;
+            line-height: 1.4;
+            transition: background-color 0.3s, color 0.3s;
+        }
+
+        .command-box {
+            background: var(--bg-secondary);
+            border-left: 4px solid var(--accent-color);
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 5px;
+            transition: background-color 0.3s;
+        }
+
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin: 20px 0;
+        }
+
+        .feature-card {
+            background: var(--bg-secondary);
+            padding: 20px;
+            border-radius: 5px;
+            border: 2px solid var(--border-light);
+            transition: all 0.3s;
+        }
+
+        .feature-card:hover {
+            border-color: var(--accent-color);
+            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.1);
+        }
+
+        .feature-card h4 {
+            color: var(--accent-color);
+            margin-bottom: 10px;
+        }
+
+        .feature-card p {
+            font-size: 14px;
+            margin-bottom: 0;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            font-size: 14px;
+        }
+
+        table thead {
+            background: var(--accent-color);
+            color: white;
+        }
+
+        table th, table td {
+            padding: 12px;
+            text-align: left;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        table tbody tr:hover {
+            background: var(--table-hover);
+        }
+
+        .info-box {
+            background: var(--info-bg);
+            border-left: 4px solid var(--info-border);
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 5px;
+            transition: background-color 0.3s;
+        }
+
+        .warning-box {
+            background: var(--warning-bg);
+            border-left: 4px solid var(--warning-border);
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 5px;
+            transition: background-color 0.3s;
+        }
+
+        .success-box {
+            background: var(--success-bg);
+            border-left: 4px solid var(--success-border);
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 5px;
+            transition: background-color 0.3s;
+        }
+
+        .version-info {
+            background: var(--bg-secondary);
+            padding: 20px;
+            border-radius: 5px;
+            margin: 20px 0;
+            transition: background-color 0.3s;
+        }
+
+        .version-info h4 {
+            color: var(--accent-color);
+            margin-bottom: 10px;
+        }
+
+        .version-info p {
+            margin: 5px 0;
+            font-size: 14px;
+            color: var(--text-secondary);
+        }
+
+        footer {
+            background: var(--bg-secondary);
+            padding: 30px 40px;
+            text-align: center;
+            color: var(--text-tertiary);
+            border-top: 1px solid var(--border-color);
+            transition: background-color 0.3s, color 0.3s;
+        }
+
+        footer p {
+            margin: 5px 0;
+            font-size: 14px;
+        }
+
+        footer a {
+            color: var(--accent-color);
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        footer a:hover {
+            color: var(--accent-dark) solid #ddd;
+        }
+
+        footer p {
+            margin: 5px 0;
+            font-size: 14px;
+        }
+
+        .installation-steps {
+            list-style-type: decimal;
+        }
+
+        .installation-steps li {
+            margin-bottom: 15px;
+        }
+
+        @media (max-width: 768px) {
+            header {
+                padding: 40px 20px;
+            }
+
+            .logo {
+                font-size: 36px;
+            }
+
+            main {
+                padding: 20px;
+            }
+
+            nav {
+                padding: 15px 20px;
+            }
+
+            .feature-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media print {
+            body {
+                background: white;
+                padding: 0;
+                color: #222;
+            }
+
+            .container {
+                max-width: none;
+                box-shadow: none;
+                border-radius: 0;
+            }
+
+            header, footer, nav, .theme-toggle {
+                display: none !important;
+            }
+
+            main {
+                padding: 20px;
+            }
+
+            section {
+                display: block !important;
+                margin-bottom: 24px;
+                page-break-inside: avoid;
+            }
+
+            .command-box, .info-box, .success-box, .warning-box, .version-info {
+                box-shadow: none;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <div class="logo">🔐 HIDEBAF</div>
+            <div class="tagline">Highly Incubated Dragonian Encryptory Binary using an Archive of Files</div>
+            <div class="subtitle">Plugin-ready AES-256-GCM toolkit with compression, verification, and visual themes</div>
+        </header>
+
+        <nav>
+            <div class="nav-links">
+                <a onclick="showSection('overview')">Overview</a>
+                <a onclick="showSection('features')">Features</a>
+                <a onclick="showSection('installation')">Installation</a>
+                <a onclick="showSection('usage')">Usage</a>
+                <a onclick="showSection('commands')">Commands</a>
+                <a onclick="showSection('advanced')">Advanced</a>
+                <a onclick="showSection('requirements')">Requirements</a>
+                <a onclick="showSection('faq')">FAQ</a>
+                <a onclick="showSection('support')">Support</a>
+            </div>
+            <button class="theme-toggle" onclick="toggleTheme()" title="Toggle dark mode">
+                <span id="theme-icon">🌙</span>
+                <span id="theme-text">Dark</span>
+            </button>
+        </nav>
+
+        <main>
+            <section id="overview" class="active">
+                <h2>Overview</h2>
+                <p>HIDEBAF is a feature-rich archive and encryption toolkit built around the Scorched Earth methodology. It now supports multi-token archives, optional payload compression, plugin extensions, archive verification, secure wipe workflows, auditing, and visual CLI themes.</p>
+
+                <h3>What is HIDEBAF?</h3>
+                <p>HIDEBAF stands for Highly Incubated Dragonian Encryptory Binary using an Archive of Files. It combines military-grade AES-256-GCM encryption with a flexible token model and a growing plugin ecosystem.</p>
+
+                <h3>Key Characteristics</h3>
+                <ul>
+                    <li><strong>Encryption Algorithm:</strong> AES-256-GCM with 256-bit keys</li>
+                    <li><strong>Archive Format:</strong> Custom binary .HIDEBAF archives</li>
+                    <li><strong>Token Format:</strong> .EBFATs token export/import files</li>
+                    <li><strong>Runtime:</strong> Bun 1.3.14+ with Node-compatible modules</li>
+                    <li><strong>Plugin Support:</strong> Base plugins plus custom plugin installation</li>
+                    <li><strong>Platform:</strong> Windows, macOS, Linux</li>
+                    <li><strong>License:</strong> GPL-3.0</li>
+                    <li><strong>Version:</strong> 1.0.0</li>
+                </ul>
+            </section>
+
+            <section id="features">
+                <h2>Features</h2>
+
+                <h3>Core Encryption Features</h3>
+                <ul>
+                    <li><strong>Military-grade encryption:</strong> AES-256-GCM payloads with authentication tags</li>
+                    <li><strong>Scorched Earth methodology:</strong> Multi-token redirection with real and decoy tokens</li>
+                    <li><strong>Archive hints:</strong> Store optional metadata directly in the archive header</li>
+                    <li><strong>Compression control:</strong> Leave payload compression enabled by default or disable it with --no-compress</li>
+                    <li><strong>Offline operation:</strong> Everything runs locally without a network dependency</li>
+                </ul>
+
+                <h3>Token and Archive Controls</h3>
+                <ul>
+                    <li><strong>Multiple tokens per archive:</strong> Create real and decoy tokens for layered access scenarios</li>
+                    <li><strong>Token export/import:</strong> Build and inspect .EBFATs files from the CLI</li>
+                    <li><strong>Archive inspection:</strong> View slot count, flags, hint text, and archive metadata without decrypting</li>
+                    <li><strong>Batch processing:</strong> Encrypt multiple files into one archive in a single command</li>
+                    <li><strong>Secure file handling:</strong> Supports large files, multiple file types, and custom output paths</li>
+                </ul>
+
+                <h3>Plugin & Extensibility</h3>
+                <ul>
+                    <li><strong>Base plugins:</strong> Built-in modules for logging, verification, compression analysis, and banners</li>
+                    <li><strong>Custom plugins:</strong> Install new plugins from disk with plugin add</li>
+                    <li><strong>Plugin lifecycle:</strong> Inspect, remove, and query plugin metadata from the CLI</li>
+                    <li><strong>Hook-based design:</strong> Plugins can respond to hide/reveal lifecycle events</li>
+                </ul>
+
+                <h3>Operational Utilities</h3>
+                <ul>
+                    <li><strong>Archive verification:</strong> Confirm structure, flags, and checksums</li>
+                    <li><strong>Benchmarking:</strong> Measure local AES-256-GCM and KDF throughput</li>
+                    <li><strong>Secure wipe:</strong> Overwrite and remove files with the Scorched Earth shredder</li>
+                    <li><strong>Audit logs:</strong> Inspect recent operations through the logger plugin</li>
+                    <li><strong>Visual themes:</strong> Change the CLI banner experience with theme</li>
+                </ul>
+            </section>
+
+            <section id="installation">
+                <h2>Installation</h2>
+                <h3>Prerequisites</h3>
+                <ul class="installation-steps">
+                    <li><strong>Bun Runtime:</strong> Version 1.3.14 or higher</li>
+                    <li><strong>Operating System:</strong> Windows 7+, macOS 10.13+, or Linux</li>
+                    <li><strong>Disk Space:</strong> Minimum 50 MB for installation</li>
+                    <li><strong>RAM:</strong> Minimum 256 MB (512 MB recommended)</li>
+                    <li><strong>Terminal Access:</strong> Command-line interface access is required</li>
+                </ul>
+
+                <h3>Installation Steps</h3>
+                <ol class="installation-steps">
+                    <li><strong>Install Bun</strong><div class="command-box"><code>curl -fsSL https://bun.sh/install | bash</code></div></li>
+                    <li><strong>Verify Bun</strong><div class="command-box"><code>bun --version</code></div><p>Expect <code>1.3.14</code> or newer.</p></li>
+                    <li><strong>Open the project folder</strong><div class="command-box"><code>cd HIDEBAF/Com.DAPOWER99.hidebaf</code></div></li>
+                    <li><strong>Install dependencies</strong><div class="command-box"><code>bun install</code></div></li>
+                    <li><strong>Run the CLI</strong><div class="command-box"><code>bun ./Bin/Versions/1.0/hidebaff.js --help</code></div></li>
+                </ol>
+                <div class="success-box"><strong>✓ Ready to use:</strong> HIDEBAF now supports encryption, token export/import, plugins, verification, benchmarking, and more.</div>
+            </section>
+
+            <section id="usage">
+                <h2>Usage Guide</h2>
+                <h3>Basic Workflow</h3>
+                <ol>
+                    <li><strong>Encrypt files:</strong> Use hide to build a .HIDEBAF archive</li>
+                    <li><strong>Create tokens:</strong> Use export-tokens to build an .EBFATs file</li>
+                    <li><strong>Decrypt archives:</strong> Use reveal with a matching token</li>
+                    <li><strong>Inspect or verify:</strong> Use info, verify, or compress-stats</li>
+                </ol>
+
+                <h3>Example: Encrypt with compression and a hint</h3>
+                <pre>$ bun ./Bin/Versions/1.0/hidebaff.js hide report.pdf --hint "finance" --export-tokens mytokens
+
+✓ Archive created successfully
+✓ Tokens exported: mytokens.EBFATs</pre>
+
+                <h3>Example: Add decoy tokens</h3>
+                <pre>$ bun ./Bin/Versions/1.0/hidebaff.js hide secret.txt --decoy decoy-one --decoy decoy-two</pre>
+
+                <h3>Example: Reveal an archive</h3>
+                <pre>$ bun ./Bin/Versions/1.0/hidebaff.js reveal report.HIDEBAF --token "my-secret-token"</pre>
+
+                <h3>Example: Inspect plugins</h3>
+                <pre>$ bun ./Bin/Versions/1.0/hidebaff.js plugin list</pre>
+
+                <h3>Example: Verify integrity</h3>
+                <pre>$ bun ./Bin/Versions/1.0/hidebaff.js verify report.HIDEBAF</pre>
+            </section>
+
+            <section id="commands">
+                <h2>Command Reference</h2>
+
+                <h3>hide [options] &lt;files...&gt;</h3>
+                <p><strong>Description:</strong> Encrypt one or more files into a .HIDEBAF archive.</p>
+                <div class="command-box"><code>hidebaf hide [options] file1.txt file2.pdf</code></div>
+                <p><strong>Options:</strong></p>
+                <ul>
+                    <li><code>-o, --output &lt;file&gt;</code>: Output archive path</li>
+                    <li><code>--token &lt;token&gt;</code>: Provide a real token non-interactively</li>
+                    <li><code>--hint &lt;text&gt;</code>: Store a plaintext hint in the archive header</li>
+                    <li><code>--no-compress</code>: Disable zlib payload compression</li>
+                    <li><code>--decoy &lt;password&gt;</code>: Add a decoy token; repeatable</li>
+                    <li><code>--export-tokens &lt;path&gt;</code>: Export all tokens to a .EBFATs file</li>
+                </ul>
+
+                <h3>reveal [options] &lt;archive&gt;</h3>
+                <p><strong>Description:</strong> Decrypt a .HIDEBAF archive using a token.</p>
+                <div class="command-box"><code>hidebaf reveal [options] archive.HIDEBAF</code></div>
+
+                <h3>export-tokens [options]</h3>
+                <p><strong>Description:</strong> Interactively build and export a .EBFATs file.</p>
+                <div class="command-box"><code>hidebaf export-tokens --output tokens.EBFATs</code></div>
+
+                <h3>import-tokens &lt;ebfats&gt;</h3>
+                <p><strong>Description:</strong> List the token labels and types stored in a .EBFATs file.</p>
+                <div class="command-box"><code>hidebaf import-tokens tokens.EBFATs</code></div>
+
+                <h3>info &lt;archive&gt;</h3>
+                <p><strong>Description:</strong> Display archive metadata without decrypting the contents.</p>
+                <div class="command-box"><code>hidebaf info archive.HIDEBAF</code></div>
+
+                <h3>plugin &lt;subcommand&gt;</h3>
+                <p><strong>Description:</strong> List, install, remove, or inspect plugins.</p>
+                <div class="command-box"><code>hidebaf plugin list</code><br><code>hidebaf plugin add ./my-plugin.js</code><br><code>hidebaf plugin remove my-plugin</code><br><code>hidebaf plugin info verifier</code></div>
+
+                <h3>verify &lt;archive&gt;</h3>
+                <p><strong>Description:</strong> Cryptographically verify archive structure and checksums.</p>
+                <div class="command-box"><code>hidebaf verify archive.HIDEBAF</code></div>
+
+                <h3>benchmark</h3>
+                <p><strong>Description:</strong> Measure local AES-256-GCM and scrypt KDF throughput.</p>
+                <div class="command-box"><code>hidebaf benchmark</code></div>
+
+                <h3>wipe &lt;files...&gt;</h3>
+                <p><strong>Description:</strong> Securely overwrite and delete files using the Scorched Earth shredder.</p>
+                <div class="command-box"><code>hidebaf wipe secret.txt</code></div>
+
+                <h3>audit</h3>
+                <p><strong>Description:</strong> Show recent operation logs from the logger plugin.</p>
+                <div class="command-box"><code>hidebaf audit</code></div>
+
+                <h3>compress-stats &lt;archive&gt;</h3>
+                <p><strong>Description:</strong> Analyze compression ratio and space savings for an archive.</p>
+                <div class="command-box"><code>hidebaf compress-stats archive.HIDEBAF</code></div>
+
+                <h3>theme [themeName]</h3>
+                <p><strong>Description:</strong> View or set the CLI banner theme.</p>
+                <div class="command-box"><code>hidebaf theme</code><br><code>hidebaf theme cyber</code></div>
+            </section>
+
+            <section id="advanced">
+                <h2>Advanced Capabilities</h2>
+                <div class="info-box"><strong>Plugin-ready workflow:</strong> The CLI now supports a plugin lifecycle, base plugins, and custom plugin installation under the project Lib folders.</div>
+                <ul>
+                    <li><strong>Compression analysis:</strong> Measure payload savings with compress-stats.</li>
+                    <li><strong>Archive integrity verification:</strong> Validate archive structure and checksums with verify.</li>
+                    <li><strong>Performance benchmarking:</strong> Check local AES-256-GCM and KDF throughput with benchmark.</li>
+                    <li><strong>Secure deletion:</strong> Use wipe for irreversible file removal.</li>
+                    <li><strong>Audit visibility:</strong> Review recent logs with audit.</li>
+                    <li><strong>Visual presentation:</strong> Toggle between dragon, stealth, cyber, and classic themes.</li>
+                </ul>
+            </section>
+
+            <section id="requirements">
+                <h2>System Requirements</h2>
+                <h3>Minimum Requirements</h3>
+                <ul>
+                    <li>Processor: 1.0 GHz 64-bit</li>
+                    <li>RAM: 256 MB</li>
+                    <li>Disk Space: 50 MB</li>
+                    <li>Operating System: Windows 7+ / macOS 10.13+ / Linux</li>
+                </ul>
+                <h3>Runtime Requirements</h3>
+                <ul>
+                    <li>Bun Runtime: 1.3.14 or higher</li>
+                    <li>Purpose: JavaScript/TypeScript runtime and package manager</li>
+                </ul>
+            </section>
+
+            <section id="faq">
+                <h2>Frequently Asked Questions</h2>
+                <h3>What is the encryption strength?</h3>
+                <p>HIDEBAF uses AES-256-GCM and is designed for strong local encryption with authenticated payloads. The implementation is suitable for personal and professional file protection.</p>
+                <h3>Can I decrypt my archive without the token?</h3>
+                <p>No. Access to the archive still depends on the correct token. The archive metadata can be inspected without decryption, but the contents remain protected.</p>
+                <h3>Can I use decoy tokens?</h3>
+                <p>Yes. HIDEBAF supports real and decoy tokens so you can create layered access scenarios without exposing a single master token.</p>
+                <h3>Can I add plugins?</h3>
+                <p>Yes. The CLI includes plugin management commands so you can inspect built-in plugins or install custom ones from disk.</p>
+                <h3>Can I verify an archive after creation?</h3>
+                <p>Yes. Use verify to inspect archive integrity and checksum-related metadata.</p>
+                <h3>Can I disable compression?</h3>
+                <p>Yes. Use --no-compress when creating archives if you want to avoid zlib payload compression.</p>
+            </section>
+
+            <section id="support">
+                <h2>Support & Resources</h2>
+                <ul>
+                    <li><strong>Documentation:</strong> Review the markdown files in the package and the built-in CLI help</li>
+                    <li><strong>Built-in Help:</strong> hidebaf help [command]</li>
+                    <li><strong>GitHub Issues:</strong> https://github.com/DAPOWER99/HIDEBAF/issues</li>
+                    <li><strong>GitHub Discussions:</strong> https://github.com/DAPOWER99/HIDEBAF/discussions</li>
+                </ul>
+                <div class="version-info">
+                    <h4>HIDEBAF v1.0.0</h4>
+                    <p><strong>Status:</strong> Stable CLI release</p>
+                    <p><strong>License:</strong> GPL-3.0</p>
+                    <p><strong>Bun Requirement:</strong> 1.3.14+</p>
+                </div>
+            </section>
+        </main>
+
+        <footer>
+            <p>&copy; 2026 DAPOWER99 - HIDEBAF Project</p>
+            <p>Licensed under GNU GPL v3.0 | Bun Runtime 1.3.14+</p>
+            <p>Military-Grade AES-256-GCM Encryption · Scorched Earth Methodology</p>
+            <p><a href="https://github.com/DAPOWER99/HIDEBAF" target="_blank">GitHub Repository</a> | <a href="https://bun.sh" target="_blank">Bun Runtime</a></p>
+        </footer>
+    </div>
+
+    <script>
+        // Theme Management
+        function initTheme() {
+            const savedTheme = localStorage.getItem('theme') || 'light';
+            if (savedTheme === 'dark') {
+                document.body.classList.add('dark-mode');
+                updateThemeButton('light');
+            } else {
+                document.body.classList.remove('dark-mode');
+                updateThemeButton('dark');
+            }
+        }
+
+        function toggleTheme() {
+            document.body.classList.toggle('dark-mode');
+            const isDarkMode = document.body.classList.contains('dark-mode');
+            localStorage.setItem('theme', isDarkMode ? 'dark' : 'light');
+            updateThemeButton(isDarkMode ? 'light' : 'dark');
+        }
+
+        function updateThemeButton(nextTheme) {
+            const icon = document.getElementById('theme-icon');
+            const text = document.getElementById('theme-text');
+            if (nextTheme === 'dark') {
+                icon.textContent = '🌙';
+                text.textContent = 'Dark';
+            } else {
+                icon.textContent = '☀️';
+                text.textContent = 'Light';
+            }
+        }
+
+        // Section Management
+        function showSection(sectionId) {
+            // Hide all sections
+            const sections = document.querySelectorAll('section');
+            sections.forEach(section => {
+                section.classList.remove('active');
+            });
+
+            // Show selected section
+            const selectedSection = document.getElementById(sectionId);
+            if (selectedSection) {
+                selectedSection.classList.add('active');
+            }
+
+            // Scroll to top
+            window.scrollTo(0, 0);
+        }
+
+        // Initialize on page load
+        window.addEventListener('load', () => {
+            initTheme();
+            showSection('overview');
+        });
+    </script>
+</body>
+</html>

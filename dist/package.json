@@ -1,0 +1,28 @@
+{
+  "name": "hidebaf",
+  "version": "1.0.0",
+  "description": "HIDEBAF bundled CLI distribution for secure archive encryption and decryption.",
+  "private": false,
+  "type": "module",
+  "main": "./hidebaf.bundle.js",
+  "bin": {
+    "hidebaf": "./hidebaf.bundle.js"
+  },
+  "scripts": {
+    "start": "bun ./hidebaf.bundle.js",
+    "run": "bun ./hidebaf.bundle.js"
+  },
+  "files": [
+    "hidebaf.bundle.js"
+  ],
+  "preferGlobal": true,
+  "keywords": [
+    "hidebaf",
+    "encryption",
+    "archive",
+    "cli",
+    "security"
+  ],
+  "author": "DAPOWER99",
+  "license": "GPL-3.0"
+}

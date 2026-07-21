@@ -1,0 +1,4 @@
+[2026-07-21T18:08:52.449Z] [HIDE_START] {"files":["sample_secret.txt"],"output":"test_archive.HIDEBAF"}
+[2026-07-21T18:08:52.672Z] [HIDE_SUCCESS] {"output":"test_archive.HIDEBAF","tokenCount":2}
+[2026-07-21T18:10:25.089Z] [REVEAL_START] {"archive":"test_archive.HIDEBAF","outputDir":"C:\\hidebaf\\test-output"}
+[2026-07-21T18:10:25.204Z] [REVEAL_SUCCESS] {"archive":"test_archive.HIDEBAF","extractedCount":1}

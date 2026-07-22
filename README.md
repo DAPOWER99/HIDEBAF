@@ -10,7 +10,9 @@
 ```
 
 **Highly Incubated Dragonian Encryptory Binary using an Archive of Files**
+
 Ebfats: **(Export Binary File Archive Token)set**
+
 > Binary Archive Format · Scorched Earth Encryption with AES-256-GCM Payloads
 
 ---

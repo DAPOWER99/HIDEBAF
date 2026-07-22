@@ -53,7 +53,7 @@ hidebaf settings
 ```
 
 ## 5. System Reference
-- **Architecture Spec:** See [ARCHITECTURE.md](./Com.DAPOWER99.hidebaf/architecture.md)
+- **Architecture Spec:** See [ARCHITECTURE.md](./Com.DAPOWER99.hidebaf/ARCHITECTURE.md)
 - **Features List:** See [FEATURES.md](./Com.DAPOWER99.hidebaf/FEATURES.md)
 - **Version History:** See [VERSION.md](./Com.DAPOWER99.hidebaf/VERSION.md)
 - **Technical Documentation:** See [documentation.md](./documentation.md)

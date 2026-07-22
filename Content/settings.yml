@@ -1,0 +1,19 @@
+# HIDEBAF Settings Configuration
+
+theme: classic
+secret_modes:
+  scorched_earth: false
+  ghost: false
+  paranoid: false
+  anonymize: true
+features:
+  default_compress: true
+  auto_redirection: false
+  verbose_audit: true
+  export_warnings: true
+self_destruct:
+  active: false
+  max_attempts: 5
+  mode: firstTime
+disabled_plugins:
+disabled_commands:

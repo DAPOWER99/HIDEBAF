@@ -1,0 +1,521 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HIDEBAF - Technical Documentation</title>
+    <style>
+        :root {
+            /* Light Mode Colors */
+            --bg-primary: white;
+            --bg-secondary: #f8f9fa;
+            --bg-gradient-start: #667eea;
+            --bg-gradient-end: #764ba2;
+            --text-primary: #333;
+            --text-secondary: #555;
+            --text-tertiary: #666;
+            --border-color: #ddd;
+            --border-light: #e9ecef;
+            --code-bg: #f4f4f4;
+            --code-text: #e83e8c;
+            --header-text: white;
+            --accent-color: #667eea;
+            --accent-dark: #764ba2;
+            --info-bg: #e7f3ff;
+            --info-border: #2196F3;
+            --warning-bg: #fff3cd;
+            --warning-border: #ffc107;
+            --success-bg: #d4edda;
+            --success-border: #28a745;
+            --pre-bg: #2c3e50;
+            --pre-text: #ecf0f1;
+            --table-hover: #f8f9fa;
+            --shadow: rgba(0, 0, 0, 0.3);
+            --nav-hover: #667eea;
+        }
+
+        body.dark-mode {
+            /* Dark Mode Colors */
+            --bg-primary: #1e1e1e;
+            --bg-secondary: #2d2d2d;
+            --bg-gradient-start: #667eea;
+            --bg-gradient-end: #764ba2;
+            --text-primary: #e0e0e0;
+            --text-secondary: #b0b0b0;
+            --text-tertiary: #999;
+            --border-color: #444;
+            --border-light: #3a3a3a;
+            --code-bg: #2d2d2d;
+            --code-text: #ff79c6;
+            --header-text: white;
+            --accent-color: #8b9dff;
+            --accent-dark: #a78bfa;
+            --info-bg: #1a3a52;
+            --info-border: #64b5f6;
+            --warning-bg: #3d3000;
+            --warning-border: #ffb74d;
+            --success-bg: #1b3a1b;
+            --success-border: #66bb6a;
+            --pre-bg: #1a1a1a;
+            --pre-text: #e0e0e0;
+            --table-hover: #2d2d2d;
+            --shadow: rgba(0, 0, 0, 0.5);
+            --nav-hover: #8b9dff;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: var(--text-primary);
+            background: linear-gradient(135deg, var(--bg-gradient-start) 0%, var(--bg-gradient-end) 100%);
+            min-height: 100vh;
+            padding: 20px;
+            transition: background-color 0.3s, color 0.3s;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: var(--bg-primary);
+            border-radius: 10px;
+            box-shadow: 0 20px 60px var(--shadow);
+            overflow: hidden;
+            transition: background-color 0.3s;
+        }
+
+        header {
+            background: linear-gradient(135deg, var(--bg-gradient-start) 0%, var(--bg-gradient-end) 100%);
+            color: var(--header-text);
+            padding: 60px 40px;
+            text-align: center;
+            position: relative;
+        }
+
+        .logo {
+            font-size: 48px;
+            font-weight: bold;
+            margin-bottom: 10px;
+            letter-spacing: 2px;
+        }
+
+        .tagline {
+            font-size: 20px;
+            margin-bottom: 5px;
+            opacity: 0.9;
+        }
+
+        .subtitle {
+            font-size: 14px;
+            opacity: 0.8;
+        }
+
+        nav {
+            background: var(--bg-secondary);
+            padding: 15px 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid var(--border-color);
+            transition: background-color 0.3s, border-color 0.3s;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 20px;
+        }
+
+        nav a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-weight: 600;
+            cursor: pointer;
+            transition: color 0.3s;
+        }
+
+        nav a:hover {
+            color: var(--nav-hover);
+        }
+
+        .theme-toggle {
+            background: none;
+            border: none;
+            font-size: 16px;
+            color: var(--text-secondary);
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-weight: 600;
+            padding: 5px 10px;
+            border-radius: 5px;
+            transition: background-color 0.3s, color 0.3s;
+        }
+
+        .theme-toggle:hover {
+            background: var(--border-light);
+            color: var(--text-primary);
+        }
+
+        main {
+            padding: 40px;
+        }
+
+        section {
+            display: none;
+        }
+
+        section.active {
+            display: block;
+            animation: fadeIn 0.5s ease;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        h2 {
+            color: var(--accent-color);
+            font-size: 28px;
+            margin-bottom: 20px;
+            border-bottom: 2px solid var(--border-light);
+            padding-bottom: 10px;
+            transition: border-color 0.3s;
+        }
+
+        h3 {
+            color: var(--text-primary);
+            font-size: 20px;
+            margin: 25px 0 10px 0;
+        }
+
+        p {
+            margin-bottom: 15px;
+            color: var(--text-secondary);
+        }
+
+        ul, ol {
+            margin-bottom: 20px;
+            padding-left: 20px;
+            color: var(--text-secondary);
+        }
+
+        li {
+            margin-bottom: 8px;
+        }
+
+        code {
+            font-family: 'Consolas', 'Courier New', Courier, monospace;
+            background: var(--code-bg);
+            color: var(--code-text);
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-size: 14px;
+            transition: background-color 0.3s, color 0.3s;
+        }
+
+        pre {
+            background: var(--pre-bg);
+            color: var(--pre-text);
+            padding: 20px;
+            border-radius: 5px;
+            overflow-x: auto;
+            font-family: 'Consolas', 'Courier New', Courier, monospace;
+            font-size: 14px;
+            margin-bottom: 20px;
+        }
+
+        .command-box {
+            background: var(--code-bg);
+            border: 1px solid var(--border-color);
+            padding: 12px 15px;
+            border-radius: 5px;
+            margin-bottom: 15px;
+            font-family: monospace;
+            transition: background-color 0.3s, border-color 0.3s;
+        }
+
+        .info-box {
+            background: var(--info-bg);
+            border-left: 4px solid var(--info-border);
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 5px;
+            transition: background-color 0.3s;
+        }
+
+        .warning-box {
+            background: var(--warning-bg);
+            border-left: 4px solid var(--warning-border);
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 5px;
+            transition: background-color 0.3s;
+        }
+
+        .success-box {
+            background: var(--success-bg);
+            border-left: 4px solid var(--success-border);
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 5px;
+            transition: background-color 0.3s;
+        }
+
+        .version-info {
+            background: var(--bg-secondary);
+            padding: 20px;
+            border-radius: 5px;
+            margin: 20px 0;
+            transition: background-color 0.3s;
+        }
+
+        .version-info h4 {
+            color: var(--accent-color);
+            margin-bottom: 10px;
+        }
+
+        .version-info p {
+            margin: 5px 0;
+            font-size: 14px;
+            color: var(--text-secondary);
+        }
+
+        footer {
+            background: var(--bg-secondary);
+            padding: 30px 40px;
+            text-align: center;
+            color: var(--text-tertiary);
+            border-top: 1px solid var(--border-color);
+            transition: background-color 0.3s, color 0.3s;
+        }
+
+        footer a {
+            color: var(--accent-color);
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        footer a:hover {
+            color: var(--accent-dark);
+        }
+
+        .installation-steps {
+            list-style-type: decimal;
+        }
+
+        .installation-steps li {
+            margin-bottom: 15px;
+        }
+
+        @media (max-width: 768px) {
+            header { padding: 40px 20px; }
+            .logo { font-size: 36px; }
+            main { padding: 20px; }
+            nav { padding: 15px 20px; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <div class="logo">🔐 HIDEBAF</div>
+            <div class="tagline">Highly Incubated Dragonian Encryptory Binary using an Archive of Files</div>
+            <div class="subtitle">Scorched Earth multi-token AES-256-GCM encryption with anonymize & self-destruct capabilities</div>
+        </header>
+
+        <nav>
+            <div class="nav-links">
+                <a onclick="showSection('overview')">Overview</a>
+                <a onclick="showSection('cryptography')">Cryptography</a>
+                <a onclick="showSection('features')">Features</a>
+                <a onclick="showSection('installation')">Installation</a>
+                <a onclick="showSection('commands')">Commands</a>
+                <a onclick="showSection('config')">Configuration</a>
+                <a onclick="showSection('faq')">FAQ</a>
+            </div>
+            <button class="theme-toggle" onclick="toggleTheme()" title="Toggle dark mode">
+                <span id="theme-icon">🌙</span>
+                <span id="theme-text">Dark</span>
+            </button>
+        </nav>
+
+        <main>
+            <section id="overview" class="active">
+                <h2>1. Overview & Architecture</h2>
+                <p>HIDEBAF is a high-security CLI-based file encryption utility implementing "scorched earth" multi-token redirection. Unlike conventional single-key encryption formats, HIDEBAF supports split key-material verification where a single archive can contain multiple authentication key slots (both real and decoy), mapping to different virtual sectors.</p>
+                
+                <h3>Key Characteristics</h3>
+                <ul>
+                    <li><strong>Encryption Algorithm:</strong> AES-256-GCM with 256-bit keys</li>
+                    <li><strong>Archive Format:</strong> Custom binary .HIDEBAF archives</li>
+                    <li><strong>Token Format:</strong> .EBFATs token export/import files</li>
+                    <li><strong>Runtime:</strong> Bun 1.3.14+ with Node-compatible modules</li>
+                    <li><strong>Platform:</strong> Windows, macOS, Linux</li>
+                    <li><strong>License:</strong> MIT</li>
+                </ul>
+            </section>
+
+            <section id="cryptography">
+                <h2>2. Cryptographic Protocol Specification</h2>
+                <h3>Key Derivation Function (KDF)</h3>
+                <p>To translate a user-supplied token password into cryptographic keys, HIDEBAF employs <code>scrypt</code> key derivation:</p>
+                <ul>
+                    <li><strong>Default Work Factor (N):</strong> 16384</li>
+                    <li><strong>Paranoid Mode Work Factor (N):</strong> 65536</li>
+                    <li><strong>Block Size (r):</strong> 8</li>
+                    <li><strong>Parallelization (p):</strong> 1</li>
+                    <li><strong>Output Key Length:</strong> 64 bytes (split into a 32-byte Encryption Key and a 32-byte Authentication Verifier)</li>
+                </ul>
+
+                <h3>Key Slot Architecture (Slot Size: 212 Bytes)</h3>
+                <p>Each slot in the archive represents a potential door. The slot is composed of:</p>
+                <ol>
+                    <li><strong>Token Salt (16 bytes):</strong> Random cryptographic salt generated using CSPRNG.</li>
+                    <li><strong>Verifier (32 bytes):</strong> Generated by hashing the derived scrypt key with SHA-256. This is matched during decryption to locate the appropriate key slot.</li>
+                    <li><strong>Slot IV (12 bytes):</strong> Initialization vector for GCM encryption of the sector reference metadata.</li>
+                    <li><strong>Slot Tag (16 bytes):</strong> Authenticated decryption tag of the GCM block.</li>
+                    <li><strong>Slot Ciphertext (136 bytes):</strong> Encrypted Sector Reference Metadata containing sector offset, sector length, and sector key.</li>
+                </ol>
+            </section>
+
+            <section id="features">
+                <h2>3. Advanced Operational Protections</h2>
+                <h3>3.1 Anonymize Mode (Metadata Scrubber)</h3>
+                <p>When <strong>Anonymize Mode</strong> is enabled, the system wipes operational forensics:</p>
+                <ul>
+                    <li><strong>Filename Schematization:</strong> Original filenames are replaced in the archive's internal manifest with sequential mappings: <code>file_0.ext</code>, <code>file_1.ext</code>, etc.</li>
+                    <li><strong>Path & Username Cleansing:</strong> Directory structures, user-profile paths, and system-specific metadata are omitted from the bundle.</li>
+                    <li><strong>Header Hint Suppression:</strong> Any header hint parameters are stripped to prevent plaintext leaks.</li>
+                    <li><strong>Timestamp Sanitization:</strong> Upon extraction, the modification and access timestamps of the resulting files are set to the Unix Epoch (<code>1970-01-01 00:00:00 UTC</code>).</li>
+                </ul>
+
+                <h3>3.2 Self-Destruct Mode (Failsafe Payload Erasure)</h3>
+                <p>Self-destruct protects local archives against offline brute-force attempts:</p>
+                <ul>
+                    <li><strong>Fail Attempt Counter:</strong> Tracks successive incorrect password attempts on a target archive.</li>
+                    <li><strong>Threshold Limit:</strong> Customizable parameter <code>max_attempts</code> (defaults to 5).</li>
+                    <li><strong>Execution Rules:</strong> Supports <code>always</code>, <code>firstTime</code>, or <code>custom</code> numeric limits.</li>
+                    <li><strong>Shredding Payload:</strong> Wipes archive binary payload, replacing it with inline base64 decoy dragon logo content.</li>
+                </ul>
+            </section>
+
+            <section id="installation">
+                <h2>4. Installation & Setup</h2>
+                <ol class="installation-steps">
+                    <li><strong>Install Bun</strong><div class="command-box"><code>curl -fsSL https://bun.sh/install | bash</code></div></li>
+                    <li><strong>Install Dependencies</strong><div class="command-box"><code>bun install</code></div></li>
+                    <li><strong>Compile Standalone Binary</strong><div class="command-box"><code>bun build --compile c:\hidebaf\hidebaf.js --outfile c:\hidebaf\hidebaf.exe</code></div></li>
+                </ol>
+            </section>
+
+            <section id="commands">
+                <h2>5. Command Reference</h2>
+                <h3><code>hide [options] &lt;files...&gt;</code></h3>
+                <div class="command-box"><code>hidebaf hide -o secret.HIDEBAF confidential.txt</code></div>
+                <ul>
+                    <li><code>-o, --output &lt;file&gt;</code>: Output archive path</li>
+                    <li><code>--token &lt;token&gt;</code>: Provide a real token non-interactively</li>
+                    <li><code>--hint &lt;text&gt;</code>: Store a plaintext hint in the archive header</li>
+                    <li><code>--no-compress</code>: Disable zlib payload compression</li>
+                    <li><code>--decoy &lt;password&gt;</code>: Add a decoy token</li>
+                    <li><code>--export-tokens &lt;path&gt;</code>: Export all tokens to a .EBFATs file</li>
+                </ul>
+
+                <h3><code>settings</code></h3>
+                <p>Open settings configuration menu to toggle secret modes, theme styles, self-destruct thresholds, and command blocking routes.</p>
+                <div class="command-box"><code>hidebaf settings</code></div>
+            </section>
+
+            <section id="config">
+                <h2>6. Settings Configuration</h2>
+                <pre># HIDEBAF Settings Configuration
+theme: dragon
+secret_modes:
+  scorched_earth: false
+  ghost: false
+  paranoid: false
+  anonymize: false
+features:
+  default_compress: true
+  auto_redirection: false
+  verbose_audit: true
+  export_warnings: true
+self_destruct:
+  active: false
+  max_attempts: 5
+  mode: firstTime
+disabled_plugins: []
+disabled_commands: []</pre>
+            </section>
+
+            <section id="faq">
+                <h2>Frequently Asked Questions</h2>
+                <h3>Can I decrypt my archive without the token?</h3>
+                <p>No. Access depends on a correct slot verification key. Decoy keys lead to junk sectors.</p>
+                <h3>How does Self-Destruct trigger?</h3>
+                <p>When active, each unsuccessful decryption attempt increments the failure counter. If the maximum attempt limit is hit, the archive is permanently overwritten with decoy image base64 data.</p>
+            </section>
+        </main>
+
+        <footer>
+            <p>&copy; 2026 DAPOWER99 - HIDEBAF Project</p>
+        </footer>
+    </div>
+
+    <script>
+        function initTheme() {
+            const savedTheme = localStorage.getItem('theme') || 'light';
+            if (savedTheme === 'dark') {
+                document.body.classList.add('dark-mode');
+                updateThemeButton('light');
+            } else {
+                document.body.classList.remove('dark-mode');
+                updateThemeButton('dark');
+            }
+        }
+
+        function toggleTheme() {
+            document.body.classList.toggle('dark-mode');
+            const isDarkMode = document.body.classList.contains('dark-mode');
+            localStorage.setItem('theme', isDarkMode ? 'dark' : 'light');
+            updateThemeButton(isDarkMode ? 'light' : 'dark');
+        }
+
+        function updateThemeButton(nextTheme) {
+            const icon = document.getElementById('theme-icon');
+            const text = document.getElementById('theme-text');
+            if (nextTheme === 'dark') {
+                icon.textContent = '🌙';
+                text.textContent = 'Dark';
+            } else {
+                icon.textContent = '☀️';
+                text.textContent = 'Light';
+            }
+        }
+
+        function showSection(sectionId) {
+            const sections = document.querySelectorAll('section');
+            sections.forEach(section => {
+                section.classList.remove('active');
+            });
+            const selectedSection = document.getElementById(sectionId);
+            if (selectedSection) {
+                selectedSection.classList.add('active');
+            }
+            window.scrollTo(0, 0);
+        }
+
+        window.addEventListener('load', () => {
+            initTheme();
+            showSection('overview');
+        });
+    </script>
+</body>
+</html>
